@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #e6e5a3;
+}
+
+.app-title {
+  font-size: 30px;
+  text-transform: capitalize;
+  margin-top: 0px;
+  padding-top: 24px;
+  font-family: "Lora", serif;
+  color: #a75d5d;
+}
