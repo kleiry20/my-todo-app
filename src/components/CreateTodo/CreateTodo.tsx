@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Form } from "antd";
+import { Input, Button, Form, Row, Col, Alert } from "antd";
 import ReadTodo from "../ReadTodo/ReadTodo";
 import axios from "axios";
+import "../../App.less";
 import ExportTodo from "../ExportTodo/ExportTodo";
 import ImportTodo from "../ImportTodo/ImportTodo";
+import "./CreateTodo.less";
 
 const CreateTodo = () => {
   const [task, setTask] = useState(""); // single task for input box
@@ -46,6 +48,7 @@ const CreateTodo = () => {
           setTaskArray(tasks);
           setTask("");
           setIsupdate(false);
+          alert("Task Updated!");
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -61,6 +64,7 @@ const CreateTodo = () => {
       tasks.push(temp_task);
       setTaskArray(tasks);
       setTask("");
+      alert("New Task Created!");
     }
   };
 
@@ -75,22 +79,66 @@ const CreateTodo = () => {
   return (
     <>
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <Form onSubmitCapture={handleSubmit}>
-          <Input.Group compact>
-            <Input
-              style={{ width: "calc(100% - 400px)" }}
-              value={task}
-              placeholder="Enter task"
-              onChange={handleChange}
-            />
-            <Button onClick={handleSubmit} type="primary">
-              Confirm
-            </Button>
-          </Input.Group>
-        </Form>
-        <ExportTodo taskArray={taskArray} />
-        <ImportTodo setFetchAllTodo={setFetchAllTodo} />
+        <Row>
+          <Col span={4}>
+            {" "}
+            <ImportTodo setFetchAllTodo={setFetchAllTodo} />
+          </Col>
+          <Col span={16}>
+            {" "}
+            <Form onSubmitCapture={handleSubmit}>
+              <Input.Group compact>
+                <div>
+                  {/* <p style={{ margin: "0px", textAlign: "center" }}>
+                    I have to:{" "}
+                  </p>{" "} */}
+                </div>
+                <Input
+                  style={{ width: "calc(100% - 400px)", borderRadius: "5px" }}
+                  value={task}
+                  placeholder="Enter task"
+                  onChange={handleChange}
+                />
+                <Button className="btn-design" onClick={handleSubmit}>
+                  Create
+                </Button>
+              </Input.Group>
+            </Form>
+          </Col>
+          <Col span={4} style={{ display: "flex" }}>
+            <ExportTodo taskArray={taskArray} />
+          </Col>
+        </Row>
       </div>
+
+      {/* <div className="new-flex-row-container">
+        <div className="new-flex-row-item">
+          <Form onSubmitCapture={handleSubmit}>
+            <Input.Group compact>
+              <div>
+                <p style={{ margin: "0px", textAlign: "center" }}>
+                  I have to:{" "}
+                </p>{" "}
+              </div>
+              <Input
+                style={{ width: "calc(100% - 400px)" }}
+                value={task}
+                placeholder="Enter task"
+                onChange={handleChange}
+              />
+              <Button className="btn-design" onClick={handleSubmit}>
+                Create
+              </Button>
+            </Input.Group>
+          </Form>
+        </div>
+        <div className="new-flex-row-item">
+          <ExportTodo taskArray={taskArray} />
+        </div>
+        <div className="new-flex-row-item">
+          <ImportTodo setFetchAllTodo={setFetchAllTodo} />
+        </div>
+      </div> */}
 
       <ReadTodo
         taskArray={taskArray}

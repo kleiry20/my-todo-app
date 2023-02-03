@@ -1,44 +1,51 @@
 import React from "react";
-import { Row, Col } from "antd";
-
+import { Row, Col, Badge, Card, Divider, Space } from "antd";
 import DeleteTodo from "../DeleteTodo/DeleteTodo";
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import "./ReadTodo.less";
-import ExportTodo from "../ExportTodo/ExportTodo";
+import "../neumorphic.less";
 
 function ReadTodo(props: any): JSX.Element {
   return (
     <>
       <div className="outer-div">
-        <div id="sample">
+        <div id="sample" className="flex-row-container">
           {props.taskArray.map((singleTaskObject: any, index: BigInt) => (
-            <Row key={singleTaskObject} style={{ marginTop: "20px" }}>
-              <Col
-                span={8}
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  paddingLeft: "20px",
-                  // marginLeft: "34px",
-                }}
-              >
-                {singleTaskObject.task}
-              </Col>
-              <Col span={4}></Col>
-              <Col span={12}>
-                <DeleteTodo
-                  taskArray={props.taskArray}
-                  index={index}
-                  setTaskArray={props.setTaskArray}
-                  singleTaskObjectId={singleTaskObject._id}
-                />
-                <UpdateTodo
-                  index={index}
-                  editTask={props.editTask}
-                  singleTaskObject={singleTaskObject}
-                />
-              </Col>
-            </Row>
+            <>
+              {" "}
+              {/* using flex */}
+              <div className="flex-row-container">
+                <div className="flex-row-item">
+                  <Card size="small" className="card-bg element flat">
+                    <div>
+                      <ul>
+                        <li style={{ color: "#594545" }}>
+                          {singleTaskObject.task}
+                        </li>
+                      </ul>
+                    </div>
+                    <Divider />
+                    <Row style={{ marginBottom: "8px" }}>
+                      <Col span={12} style={{ textAlign: "center" }}>
+                        <DeleteTodo
+                          taskArray={props.taskArray}
+                          index={index}
+                          setTaskArray={props.setTaskArray}
+                          singleTaskObjectId={singleTaskObject._id}
+                        />
+                      </Col>
+                      <Col span={12} style={{ textAlign: "center" }}>
+                        <UpdateTodo
+                          index={index}
+                          editTask={props.editTask}
+                          singleTaskObject={singleTaskObject}
+                        />
+                      </Col>
+                    </Row>
+                  </Card>
+                </div>
+              </div>
+            </>
           ))}
         </div>
       </div>

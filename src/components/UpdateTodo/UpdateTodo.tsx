@@ -8,7 +8,7 @@ function UpdateTodo(props: any): JSX.Element {
 
   return (
     <Button
-      className="btn-group"
+      className="btn-group btn-design"
       onClick={() => {
         editTodo(props.singleTaskObject, props.index);
       }}

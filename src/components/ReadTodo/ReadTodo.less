@@ -1,62 +1,45 @@
-@primary-color: #e6e5a3;
+@primary-color: #f8ead8;
+@card-bg-color: #fff8ea;
 
 .outer-div {
   background-color: @primary-color;
-  min-height: 100vh;
-  min-width: 100vw;
+  // min-height: 100vh;
+  height: 73.8vh;
+  overflow: scroll;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 
-.element {
-  /* align-items: center; */
-  background-color: #d7e9b9;
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
-  border-radius: 50px;
-  /* display: flex;
-  flex-direction: row; */
-  height: 300px;
-  justify-content: center;
-  margin-right: 4rem;
-  width: 300px;
-
-  /* SHADOW PART */
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+// using grid
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+  text-align: center;
 }
 
-.flat {
-  background: #d7e9b9;
-}
-.convex-shadow {
-  background: linear-gradient(
-    -45deg,
-    rgba(0, 0, 0, 0.22),
-    rgba(255, 255, 255, 0.25)
-  );
-}
-.concave-shadow {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.22),
-    rgba(255, 255, 255, 0.25)
-  );
-}
+// div sample  style={{ display: "flex", flexDirection: "row" }}
 
-.element:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.22),
-    rgba(255, 255, 255, 0.25)
-  );
-  cursor: pointer;
-}
-
-/* foe neu design, outer div should be like this
-.outer-div {
-  background-color: #d7e9b9;
-  align-items: center;
+// using flex
+.flex-row-container {
   display: flex;
-  height: 100vh;
-  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  margin: 26px;
+  justify-content: space-evenly;
 }
-*/
+.flex-row-container > .flex-row-item {
+  /*grow | shrink | basis*/
+  //  flex: 1 1 30%;
+  height: 200px;
+  width: 300px;
+}
+
+.card-bg {
+  background-color: @card-bg-color;
+  // background-color: #eddbc7;
+  // border: 1px solid @card-bg-color;
+}

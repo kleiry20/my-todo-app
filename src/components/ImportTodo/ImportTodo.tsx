@@ -1,7 +1,37 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Button, Modal } from "antd";
+import { Input } from "antd";
+import "../../App.less";
 
 const ImportTodo = (props: any) => {
+  // modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = (e: any) => {
+    setIsModalOpen(true);
+  };
+
+  const handleOnSubmit1 = (e: any) => {
+    e.preventDefault();
+    console.log("through modal");
+
+    if (file) {
+      fileReader.onload = function (event: any) {
+        const text = event.target.result;
+        csvFileToArray(text);
+      };
+
+      fileReader.readAsText(file);
+    }
+    console.log("exit modal");
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  // file upload part
   const [file, setFile] = useState();
   const [array, setArray] = useState<any[]>([]);
 
@@ -43,6 +73,7 @@ const ImportTodo = (props: any) => {
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
+    console.log("through choose file");
 
     if (file) {
       fileReader.onload = function (event: any) {
@@ -54,29 +85,54 @@ const ImportTodo = (props: any) => {
     }
   };
 
-  const headerKeys = Object.keys(Object.assign({}, ...array));
+  // const headerKeys = Object.keys(Object.assign({}, ...array));
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <form>
-        <input
-          type={"file"}
-          id={"csvFileInput"}
-          accept={".csv"}
-          onChange={handleOnChange}
-        />
+    <>
+      <div style={{ textAlign: "center" }}>
+        <form>
+          <input
+            type={"file"}
+            id={"csvFileInput"}
+            accept={".csv"}
+            onChange={handleOnChange}
+          />
 
-        <button
-          onClick={(e) => {
-            handleOnSubmit(e);
+          <Button
+            className="btn-design"
+            onClick={(e) => {
+              handleOnSubmit(e);
+            }}
+          >
+            Import a Todo
+          </Button>
+        </form>
+        <br />
+      </div>
+
+      {/* <>
+        <Button type="primary" onClick={showModal} className="btn-design">
+          Open Modal
+        </Button>
+        <Modal
+          title="Basic Modal"
+          open={isModalOpen}
+          onOk={(e) => {
+            handleOnSubmit1(e);
           }}
+          onCancel={handleCancel}
         >
-          IMPORT CSV
-        </button>
-      </form>
-
-      <br />
-    </div>
+          <form>
+            <input
+              type={"file"}
+              id={"csvFileInput"}
+              accept={".csv"}
+              onChange={handleOnChange}
+            />
+          </form>
+        </Modal>
+      </> */}
+    </>
   );
 };
 

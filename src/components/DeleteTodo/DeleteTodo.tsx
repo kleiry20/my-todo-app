@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import axios from "axios";
+import "../../App.less";
 
 function DeleteTodo(props: any): JSX.Element {
   // const { taskArray, index, setTaskArray, singleTaskObjectId } = props;
@@ -23,7 +24,8 @@ function DeleteTodo(props: any): JSX.Element {
 
   return (
     <Button
-      className="btn-group"
+    
+      className="btn-group btn-design"
       onClick={() => {
         deleteTask(props.index);
       }}
