@@ -84,7 +84,7 @@ const CreateTodo = () => {
               onChange={handleChange}
             />
             <Button onClick={handleSubmit} type="primary">
-              Submit
+              Confirm
             </Button>
           </Input.Group>
         </Form>
