@@ -1,18 +1,18 @@
 import { Button, notification } from "antd";
 import { CSVLink } from "react-csv";
+import toast, { Toaster } from "react-hot-toast";
 import "../../App.less";
 
 const openNotification = () => {
-  notification.open({
-    message: <div style={{ color: "#fff8ea" }}>Tasks Exported!</div>,
-    description: "Your tasks have been exported!",
+  toast.success("Task Exported!", {
     style: {
-      border: "2px solid #9E7676",
-      backgroundColor: "#9E7676",
-      color: "#fff8ea",
+      border: "1px solid #713200",
+      padding: "16px",
+      color: "#713200",
     },
-    onClick: () => {
-      console.log("Tasks Exported!");
+    iconTheme: {
+      primary: "#713200",
+      secondary: "#FFFAEE",
     },
   });
 };

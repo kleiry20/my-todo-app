@@ -1,9 +1,9 @@
 import { Button, notification } from "antd";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import "../../App.less";
 
 function DeleteTodo(props: any): JSX.Element {
-
   const url = "http://localhost:5000/todo/";
 
   const deleteTask = (index: number) => {
@@ -13,16 +13,15 @@ function DeleteTodo(props: any): JSX.Element {
         let arr: string[] = props.taskArray;
         arr.splice(index, 1);
         props.setTaskArray([...arr]);
-        notification.open({
-          message: <div style={{ color: "#fff8ea" }}>Task Deleted!</div>,
-          description: "Your task has been deleted!",
+        toast.success("Task Deleted!", {
           style: {
-            border: "2px solid #9E7676",
-            backgroundColor: "#9E7676",
-            color: "#fff8ea",
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
           },
-          onClick: () => {
-            console.log("Task Deleted!");
+          iconTheme: {
+            primary: "#713200",
+            secondary: "#FFFAEE",
           },
         });
       })

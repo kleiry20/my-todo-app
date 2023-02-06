@@ -1,5 +1,6 @@
 import axios from "axios";
 import Papa from "papaparse";
+import toast, { Toaster } from "react-hot-toast";
 import "../../App.less";
 
 const ImportTodo = (props: any) => {
@@ -21,16 +22,15 @@ const ImportTodo = (props: any) => {
               })
               .then((response) => {
                 props.setFetchAllTodo(true);
-                // notification.open({
-                //   message: <div style={{ color: "#fff8ea" }}>Task Imported!</div>,
-                //   description: "Your todo list has been imported!",
+                // toast.success("Task List Imported!", {
                 //   style: {
-                //     border: "2px solid #9E7676",
-                //     backgroundColor: "#9E7676",
-                //     color: "#fff8ea",
+                //     border: "1px solid #713200",
+                //     padding: "16px",
+                //     color: "#713200",
                 //   },
-                //   onClick: () => {
-                //     console.log("Task Imported!");
+                //   iconTheme: {
+                //     primary: "#713200",
+                //     secondary: "#FFFAEE",
                 //   },
                 // });
               })
@@ -65,7 +65,6 @@ const ImportTodo = (props: any) => {
             color: "#fff8ea",
             textAlign: "center",
             boxShadow: "0 2px 0 rgb(0 0 0 / 2%)",
-
             padding: "6px 15px",
             cursor: "pointer",
           }}

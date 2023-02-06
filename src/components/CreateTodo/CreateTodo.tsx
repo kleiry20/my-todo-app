@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, Form, Row, Col, Alert, notification } from "antd";
+import toast, { Toaster } from "react-hot-toast";
 import ReadTodo from "../ReadTodo/ReadTodo";
 import axios from "axios";
 import "../../App.less";
@@ -48,50 +49,71 @@ const CreateTodo = () => {
           setTaskArray(tasks);
           setTask("");
           setIsupdate(false);
-          console.log("reponse", response.data);
 
-          notification.open({
-            message: <div style={{ color: "#fff8ea" }}>Task Updated!</div>,
-            description: "Yay, your task has been updated!",
-            className: "notification-design",
+          //   notification.open({
+          //     message: <div style={{ color: "#fff8ea" }}>Task Updated!</div>,
+          //     description: "Yay, your task has been updated!",
+          //     className: "notification-design",
+          //     style: {
+          //       border: "2px solid #9E7676",
+          //       backgroundColor: "#9E7676",
+          //       color: "#fff8ea",
+          //     },
+          //     onClick: () => {
+          //       console.log("Task Updated!");
+          //     },
+          //   });
+
+          toast.success("Current Task Updated!", {
             style: {
-              border: "2px solid #9E7676",
-              backgroundColor: "#9E7676",
-              color: "#fff8ea",
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
             },
-            onClick: () => {
-              console.log("Task Updated!");
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
             },
           });
         })
         .catch((error) => {
-          console.error("There was an error!", error);
+          toast.error("This didn't work.");
         });
     }
     // isupdate is false --> new task creation
     else {
-      const response = axios.post("http://localhost:5000/todo", { task: task });
-      let tasks: JSON[] = taskArray;
-      let temp_task: any = {
-        task: task,
-      };
-      tasks.push(temp_task);
-      setTaskArray(tasks);
-      setTask("");
-
-      notification.open({
-        message: <div style={{ color: "#fff8ea" }}>Task Added!</div>,
-        description: "Yay, your task has been added!",
-        className: "notification-design",
-        style: {
-          border: "2px solid #9E7676",
-          backgroundColor: "#9E7676",
-          color: "#fff8ea",
-        },
-        onClick: () => {
-          console.log("New Task Added!");
-        },
-      });
+      const response = axios
+        .post("http://localhost:5000/todo", { task: task })
+        .then((response) => {
+          setFetchAllTodo(true);
+          //   notification.open({
+          //     message: <div style={{ color: "#fff8ea" }}>Task Added!</div>,
+          //     description: "Yay, your task has been added!",
+          //     className: "notification-design",
+          //     style: {
+          //       border: "2px solid #9E7676",
+          //       backgroundColor: "#9E7676",
+          //       color: "#fff8ea",
+          //     },
+          //     onClick: () => {
+          //       console.log("New Task Added!");
+          //     },
+          //   });
+          toast.success("New Task Added!", {
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+        })
+        .catch((error) => {
+          toast.error("This didn't work.");
+        });
     }
   };
 
@@ -101,11 +123,17 @@ const CreateTodo = () => {
     setItemIndex(index);
     setTaskObjectId(singleTaskObject._id);
     setIsupdate(true);
+    // console.log("single task", singleTaskObject, singleTaskObject._id);
+    // console.log("index", index);
+    // console.log(singleTaskObject.task, "singleTaskObject.task");
   };
 
   return (
     <>
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <div>
+          <Toaster />
+        </div>
         <Row>
           <Col
             span={4}

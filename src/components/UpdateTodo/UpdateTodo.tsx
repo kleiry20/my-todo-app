@@ -2,6 +2,7 @@ import { Button } from "antd";
 
 function UpdateTodo(props: any): JSX.Element {
   const editTodo = (singleTaskObject: any, index: number) => {
+    console.log(props, "props onclick");
     props.editTask(singleTaskObject, index);
   };
 
