@@ -1,7 +1,5 @@
 import CreateTodo from "./components/CreateTodo/CreateTodo";
 import "./App.less";
-import Parent from "./components/Parent";
-// import "/themes.less";
 
 function App() {
   return (
@@ -13,7 +11,6 @@ function App() {
         TODO APP
       </div>
       <CreateTodo />
-      {/* <Parent /> */}
     </div>
   );
 }

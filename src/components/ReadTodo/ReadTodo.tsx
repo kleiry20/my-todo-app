@@ -1,5 +1,4 @@
-import React from "react";
-import { Row, Col, Badge, Card, Divider, Space } from "antd";
+import { Row, Col, Card, Divider } from "antd";
 import DeleteTodo from "../DeleteTodo/DeleteTodo";
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
 import "./ReadTodo.less";
@@ -54,25 +53,3 @@ function ReadTodo(props: any): JSX.Element {
 }
 
 export default ReadTodo;
-
-{
-  /* <p
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginLeft: "34px",
-                }}
-              >
-                {todo.username}
-                <DeleteTodo
-                  taskArray={props.taskArray}
-                  index={index}
-                  setTaskArray={props.setTaskArray}
-                />
-                <UpdateTodo
-                  index={index}
-                  editTask={props.editTask}
-                  task={todo}
-                />
-              </p> */
-}

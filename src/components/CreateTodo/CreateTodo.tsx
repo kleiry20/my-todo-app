@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Form, Row, Col, Alert } from "antd";
+import { Input, Button, Form, Row, Col, Alert, notification } from "antd";
 import ReadTodo from "../ReadTodo/ReadTodo";
 import axios from "axios";
 import "../../App.less";
@@ -13,7 +13,7 @@ const CreateTodo = () => {
   const [itemindex, setItemIndex] = useState(0); // task index/id in frontend
   const [taskObjectId, setTaskObjectId] = useState(0); // task id from backend
   const [isupdate, setIsupdate] = useState(false); // to check when updating current or creating new
-  const [fetchAllTodo, setFetchAllTodo] = useState(false); //
+  const [fetchAllTodo, setFetchAllTodo] = useState(false); // to check if all todos are fetched
 
   const url = "http://localhost:5000/todo/";
 
@@ -48,7 +48,21 @@ const CreateTodo = () => {
           setTaskArray(tasks);
           setTask("");
           setIsupdate(false);
-          alert("Task Updated!");
+          console.log("reponse", response.data);
+
+          notification.open({
+            message: <div style={{ color: "#fff8ea" }}>Task Updated!</div>,
+            description: "Yay, your task has been updated!",
+            className: "notification-design",
+            style: {
+              border: "2px solid #9E7676",
+              backgroundColor: "#9E7676",
+              color: "#fff8ea",
+            },
+            onClick: () => {
+              console.log("Task Updated!");
+            },
+          });
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -64,7 +78,20 @@ const CreateTodo = () => {
       tasks.push(temp_task);
       setTaskArray(tasks);
       setTask("");
-      alert("New Task Created!");
+
+      notification.open({
+        message: <div style={{ color: "#fff8ea" }}>Task Added!</div>,
+        description: "Yay, your task has been added!",
+        className: "notification-design",
+        style: {
+          border: "2px solid #9E7676",
+          backgroundColor: "#9E7676",
+          color: "#fff8ea",
+        },
+        onClick: () => {
+          console.log("New Task Added!");
+        },
+      });
     }
   };
 
@@ -80,7 +107,13 @@ const CreateTodo = () => {
     <>
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <Row>
-          <Col span={4}>
+          <Col
+            span={4}
+            style={{
+              display: "flex",
+              justifyContent: "right",
+            }}
+          >
             {" "}
             <ImportTodo setFetchAllTodo={setFetchAllTodo} />
           </Col>
@@ -88,11 +121,6 @@ const CreateTodo = () => {
             {" "}
             <Form onSubmitCapture={handleSubmit}>
               <Input.Group compact>
-                <div>
-                  {/* <p style={{ margin: "0px", textAlign: "center" }}>
-                    I have to:{" "}
-                  </p>{" "} */}
-                </div>
                 <Input
                   style={{ width: "calc(100% - 400px)", borderRadius: "5px" }}
                   value={task}
@@ -110,35 +138,6 @@ const CreateTodo = () => {
           </Col>
         </Row>
       </div>
-
-      {/* <div className="new-flex-row-container">
-        <div className="new-flex-row-item">
-          <Form onSubmitCapture={handleSubmit}>
-            <Input.Group compact>
-              <div>
-                <p style={{ margin: "0px", textAlign: "center" }}>
-                  I have to:{" "}
-                </p>{" "}
-              </div>
-              <Input
-                style={{ width: "calc(100% - 400px)" }}
-                value={task}
-                placeholder="Enter task"
-                onChange={handleChange}
-              />
-              <Button className="btn-design" onClick={handleSubmit}>
-                Create
-              </Button>
-            </Input.Group>
-          </Form>
-        </div>
-        <div className="new-flex-row-item">
-          <ExportTodo taskArray={taskArray} />
-        </div>
-        <div className="new-flex-row-item">
-          <ImportTodo setFetchAllTodo={setFetchAllTodo} />
-        </div>
-      </div> */}
 
       <ReadTodo
         taskArray={taskArray}
